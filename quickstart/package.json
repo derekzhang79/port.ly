@@ -1,0 +1,23 @@
+{
+  "name": "port.ly",
+  "version": "1.0.0",
+  "description": "Hack@Brown 2016",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyelax/port.ly.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dyelax/port.ly/issues"
+  },
+  "homepage": "https://github.com/dyelax/port.ly#readme",
+  "dependencies": {
+    "azure-mobile-apps": "github:azure/azure-mobile-apps-node",
+    "express": "^4.13.4"
+  }
+}
