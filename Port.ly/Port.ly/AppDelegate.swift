@@ -12,10 +12,26 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+    var client: MSClient?
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
+        self.client = MSClient(
+            applicationURLString:"https://portly.azurewebsites.net"
+        )
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let client = delegate.client!
+        let item = ["text":"Awesome item"]
+        let itemTable = client.tableWithName("TodoItem")
+        itemTable.insert(item) {
+            (insertedItem, error) in
+            if (error != nil) {
+                print("Error" + (error!).description);
+            } else {
+                print("Item inserted, id: " + String((insertedItem!)["id"]))
+            }
+        }
 		return true
 	}
 
