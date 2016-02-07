@@ -21,6 +21,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
+	
+	
 	[self.toRideDriverNameLabel setText:@"Pending..."];
 	[self.toRideLicenseLabel setText:@"Pending..."];
 	[self.fromRideDriverNameLabel setText:@"Pending..."];
@@ -46,18 +48,45 @@
 	[self.rideView.layer setMasksToBounds:YES];
 	[self.flightView.layer setCornerRadius:5];
 	[self.flightView.layer setMasksToBounds:YES];
+	[self.shadowView.layer setCornerRadius:5];
+}
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	[self setupWithFlight:self.flight];
+	
+//	UIBezierPath *shadowPath2 = [UIBezierPath bezierPathWithRect:self.rideView.bounds];
+//	self.rideView.layer.masksToBounds = NO;
+//	self.rideView.layer.shadowColor = [UIColor blackColor].CGColor;
+//	self.rideView.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
+//	self.rideView.layer.shadowOpacity = 0.5f;
+//	self.rideView.layer.shadowPath = shadowPath2.CGPath;
+}
+- (void)viewDidLayoutSubviews{
+	[super viewDidLayoutSubviews];
+	
+	UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.flightView.bounds];
+	self.flightView.layer.masksToBounds = NO;
+	self.flightView.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.flightView.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
+	self.flightView.layer.shadowOpacity = 0.3f;
+	self.flightView.layer.shadowPath = shadowPath.CGPath;
+	
+	UIBezierPath *shadowPath2 = [UIBezierPath bezierPathWithRect:self.rideView.bounds];
+	self.shadowView.layer.masksToBounds = NO;
+	self.shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.shadowView.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
+	self.shadowView.layer.shadowOpacity = 0.3f;
+	self.shadowView.layer.shadowPath = shadowPath2.CGPath;
 }
 
 - (void)setupWithFlight:(Flight *)flight {
-	self.flight = flight;
-	
 	NSDateFormatter *df = [[NSDateFormatter alloc] init];
 	[df setDateFormat:@"hh:mm a"];
 
 	[self.airlineLabel setText:self.flight.airline];
 	[self.fromAirportFull setText:self.flight.fromAirport];
 	[self.fromAirportCode setText:self.flight.fromAirportCode];
-	[self.toAirportFull setText:self.flight.toAirportCode];
+	[self.toAirportFull setText:self.flight.toAirport];
 	[self.toAirportCode setText:self.flight.toAirportCode];
 	[self.takeoffTimeLabel setText:[df stringFromDate:self.flight.takeoffTimeScheduled]];
 	
@@ -70,8 +99,8 @@
 		[self.statusLabel setTextColor:[UIColor colorWithRed:31/255.0 green:186/255.0 blue:214/255.0 alpha:1]];
 	}
 	
-	[self.toRideAirportLabel setText:[NSString stringWithFormat:@"To %@", self.fromAirportCode]];
-	[self.fromRideAirportLabel setText:[NSString stringWithFormat:@"From %@", self.toAirportCode]];
+	[self.toRideAirportLabel setText:[NSString stringWithFormat:@"To %@", self.flight.fromAirportCode]];
+	[self.fromRideAirportLabel setText:[NSString stringWithFormat:@"From %@", self.flight.toAirportCode]];
 	
 	[self.toRidePickupTimeLabel setText:[df stringFromDate:self.flight.toRidePickupTime]];
 	[self.fromRidePickupTimeLabel setText:[df stringFromDate:self.flight.fromRidePickupTime]];
@@ -89,9 +118,9 @@
 	[self.toRideDriverNameLabel setText:ride.name];
 	[self.toRideLicenseLabel setText:ride.license];
 	
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
-	[df setDateFormat:@"hh:mm a"];
-	[self.toRidePickupTimeLabel setText:[df stringFromDate:self.flight.toRidePickupTime]];
+//	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//	[df setDateFormat:@"hh:mm a"];
+//	[self.toRidePickupTimeLabel setText:[df stringFromDate:self.flight.toRidePickupTime]];
 }
 - (void)setupFromRide:(Ride *)ride {
 	[self.fromRideDriverNameLabel setTextColor:[UIColor blackColor]];
@@ -101,9 +130,9 @@
 	[self.fromRideDriverNameLabel setText:ride.name];
 	[self.fromRideLicenseLabel setText:ride.license];
 	
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
-	[df setDateFormat:@"hh:mm a"];
-	[self.fromRidePickupTimeLabel setText:[df stringFromDate:self.flight.fromRidePickupTime]];
+//	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//	[df setDateFormat:@"hh:mm a"];
+//	[self.fromRidePickupTimeLabel setText:[df stringFromDate:self.flight.fromRidePickupTime]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -130,44 +159,96 @@
 		[self.confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 		[self.confirmButton setTitle:@"Confirmed!" forState:UIControlStateNormal];
 		
-		UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, self.confirmButton.frame.size.height,
-															 self.confirmButton.frame.size.width, self.confirmButton.frame.size.height)];
-		[v setBackgroundColor:[UIColor colorWithRed:31/255.0 green:186/255.0 blue:214/255.0 alpha:1]];
-		v.userInteractionEnabled = NO;
-		v.exclusiveTouch = NO;
-		[self.confirmButton addSubview:v];
+		UIView *confirmCircle = [[UIView alloc] initWithFrame:CGRectMake(self.confirmButton.frame.size.width/2 - 5, self.confirmButton.frame.size.height/2 - 5, 10, 10)];
+		[confirmCircle.layer setCornerRadius:confirmCircle.frame.size.width / 2];
+		[confirmCircle.layer setMasksToBounds:YES];
+		[confirmCircle setBackgroundColor:[UIColor colorWithRed:31/255.0 green:186/255.0 blue:214/255.0 alpha:1]];
+		confirmCircle.userInteractionEnabled = NO;
+		confirmCircle.exclusiveTouch = NO;
+		[self.confirmButton addSubview:confirmCircle];
 		
-		[UIView animateWithDuration:0.45 animations:^{
-			
-			CGRect currentRect = v.frame;
-			currentRect.origin.y = 0;
-			[v setAlpha:1];
-			[v setFrame:currentRect];
-			[self.confirmButton sendSubviewToBack:v];
+		[UIView animateWithDuration:2 animations:^{
+			[confirmCircle setTransform:CGAffineTransformMakeScale(500, 500)];
+			[confirmCircle setCenter:self.confirmButton.center];
 		}];
-		
-		
-//		[self.confirmButton setUserInteractionEnabled:NO];
+		[self.confirmButton sendSubviewToBack:confirmCircle];
 		
 		//TEST:
-		Ride *ride1 = [[Ride alloc]init];
-		ride1.airportCode = self.flight.fromAirportCode;
-		ride1.driverImage = [UIImage imageNamed:@"driver1"];
-		ride1.name = @"Francis";
-		ride1.license = @"804217";
-		self.flight.toRidePickupTime = [NSDate date];
+		UIView *ride1BG = [[UIView alloc] initWithFrame:CGRectMake(-self.ride1View.frame.size.width, 0, self.ride1View.frame.size.width, self.ride1View.frame.size.height)];
+		[self.ride1View addSubview:ride1BG];
+		[ride1BG setBackgroundColor:[UIColor colorWithRed:31/255.0 green:186/255.0 blue:214/255.0 alpha:1]];
+		
+		dispatch_queue_t bgQueue = dispatch_queue_create("bgQueue", NULL);
+		dispatch_async(bgQueue, ^{
+			[NSThread sleepForTimeInterval:1];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				Ride *ride1 = [[Ride alloc]init];
+				ride1.airportCode = self.flight.fromAirportCode;
+				ride1.driverImage = [UIImage imageNamed:@"driver1"];
+				ride1.name = @"Francis";
+				ride1.license = @"804217";
+				self.flight.toRidePickupTime = [NSDate date];
+				
+				[self setupToRide:ride1];
+				
+				[UIView transitionWithView:self.ride1View duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+					[self.toRideAirportLabel setTextColor:[UIColor whiteColor]];
+					[self.toRideDriverNameLabel setTextColor:[UIColor whiteColor]];
+					[self.toRideLicenseLabel setTextColor:[UIColor whiteColor]];
+					[self.toRidePickupTimeLabel setTextColor:[UIColor whiteColor]];
+					[self.toRideStaticDriver setTextColor:[UIColor whiteColor]];
+					[self.toRideStaticLicense setTextColor:[UIColor whiteColor]];
+					[self.toRideStaticPickup setTextColor:[UIColor whiteColor]];
+				}completion:nil];
+			});
+		});
+		
+		[UIView animateWithDuration:0.5 delay:1.5 options:0 animations:^{
+			CGRect newFrame = CGRectMake(0, 0, self.ride1View.frame.size.width, self.ride1View.frame.size.height);
+			[ride1BG setFrame:newFrame];
+			[self.ride1View sendSubviewToBack:ride1BG];
+			[self.separatorView setAlpha:0];
+		} completion:nil];
+		
+		
+		
 
-		[self setupToRide:ride1];
 	}else {
 		//TEST:
-		Ride *ride2 = [[Ride alloc]init];
-		ride2.airportCode = self.flight.fromAirportCode;
-		ride2.driverImage = [UIImage imageNamed:@"driver2"];
-		ride2.name = @"Chelsea";
-		ride2.license = @"VX352";
-		self.flight.fromRidePickupTime = [NSDate dateWithTimeIntervalSinceNow:9999];
+		UIView *ride2BG = [[UIView alloc] initWithFrame:CGRectMake(-self.ride2View.frame.size.width, 0, self.ride2View.frame.size.height, self.ride1View.frame.size.height)];
+		[self.ride2View addSubview:ride2BG];
+		[ride2BG setBackgroundColor:[UIColor colorWithRed:18/255.0 green:114/255.0 blue:131/255.0 alpha:1]];
 		
-		[self setupFromRide:ride2];
+		dispatch_queue_t bgQueue = dispatch_queue_create("bgQueue", NULL);
+		dispatch_async(bgQueue, ^{
+			dispatch_async(dispatch_get_main_queue(), ^{
+				Ride *ride2 = [[Ride alloc]init];
+				ride2.airportCode = self.flight.fromAirportCode;
+				ride2.driverImage = [UIImage imageNamed:@"driver2"];
+				ride2.name = @"Chelsea";
+				ride2.license = @"VX352";
+				
+				[self setupFromRide:ride2];
+				
+				[UIView transitionWithView:self.ride2View duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+					[self.fromRideAirportLabel setTextColor:[UIColor whiteColor]];
+					[self.fromRideDriverNameLabel setTextColor:[UIColor whiteColor]];
+					[self.fromRideLicenseLabel setTextColor:[UIColor whiteColor]];
+					[self.fromRidePickupTimeLabel setTextColor:[UIColor whiteColor]];
+					[self.fromRideStaticDriver setTextColor:[UIColor whiteColor]];
+					[self.fromRideStaticLicense setTextColor:[UIColor whiteColor]];
+					[self.fromRideStaticPickup setTextColor:[UIColor whiteColor]];
+				}completion:nil];
+			});
+		});
+		
+		[UIView animateWithDuration:0.5 delay:0.5 options:0 animations:^{
+			CGRect newFrame = CGRectMake(0, 0, self.ride2View.frame.size.width, self.ride2View.frame.size.height);
+			[ride2BG setFrame:newFrame];
+			[self.ride2View sendSubviewToBack:ride2BG];
+		} completion:nil];
+		
+		[self.confirmButton setUserInteractionEnabled:NO];
 	}
 }
 

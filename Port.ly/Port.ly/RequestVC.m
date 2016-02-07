@@ -116,9 +116,27 @@
 	[loadingView show];
 	[loadingView setState:LoadingStateLoading];
 	[loadingView setMessage:@"Finding flight..."];
+	
+	[tempFlight setAirline:@"Jet Blue"];
+	[tempFlight setFromAirport:@"Boston Logan"];
+	[tempFlight setToAirport:@"San Francisco"];
+	[tempFlight setFromAirportCode:@"BOS"];
+	[tempFlight setToAirportCode:@"SFO"];
+	[tempFlight setTakeoffTimeScheduled:[NSDate dateWithTimeIntervalSinceNow:60*60*2]];
+	[tempFlight setTakeoffTimeReal:[NSDate dateWithTimeIntervalSinceNow:60*60*2]];
+	[tempFlight setArrivalTimeScheduled:[NSDate dateWithTimeIntervalSinceNow:60*60*2 + 60*60*6]];
+	[tempFlight setArrivalTimeReal:[NSDate dateWithTimeIntervalSinceNow:60*60*2 + 60*60*6] ];
+	[tempFlight setToRidePickupTime:[NSDate date]];
+	[tempFlight setFromRidePickupTime:[NSDate dateWithTimeIntervalSinceNow:60*60*2 + 60*60*6 + 60*20]];
 
-	[loadingView hide];//TEST
-	[self performSegueWithIdentifier:@"modalReservationVC" sender:self];//TEST
+	dispatch_queue_t bgQueue = dispatch_queue_create("bgQueue", NULL);
+	dispatch_async(bgQueue, ^{
+		[NSThread sleepForTimeInterval:1.5];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[loadingView hide];
+			[self performSegueWithIdentifier:@"modalReservationVC" sender:self];
+		});
+	});
 	
 //	//send flight number to server
 //	AppDelegate *ad = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -169,7 +187,7 @@
 //				[tempFlight setArrivalTimeReal:flightData[@"estAdate"]];
 //				[tempFlight setToRidePickupTime:flightData[@"toRideDate"]];
 //				[tempFlight setFromRidePickupTime:flightData[@"fromRideDate"]];
-//				
+//
 //				[loadingView hide];
 //				[self performSegueWithIdentifier:@"modalReservationVC" sender:self];
 //			}];
@@ -182,7 +200,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	ReservationVC *reservationVC = segue.destinationViewController;
-	[reservationVC setupWithFlight:tempFlight];
+	[reservationVC setFlight:tempFlight];
 }
 
 #pragma mark - UITextFieldDelegate

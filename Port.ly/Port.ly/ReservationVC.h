@@ -30,18 +30,28 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *rideView;
+@property (weak, nonatomic) IBOutlet UIView *ride1View;
+@property (weak, nonatomic) IBOutlet UIView *ride2View;
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet UIView *shadowView;
 
 @property (weak, nonatomic) IBOutlet UILabel *toRideAirportLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *toRideDriverImageView;
 @property (weak, nonatomic) IBOutlet UILabel *toRideDriverNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *toRideLicenseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *toRidePickupTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *toRideStaticDriver;
+@property (weak, nonatomic) IBOutlet UILabel *toRideStaticLicense;
+@property (weak, nonatomic) IBOutlet UILabel *toRideStaticPickup;
 
 @property (weak, nonatomic) IBOutlet UILabel *fromRideAirportLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *fromRideDriverImageView;
 @property (weak, nonatomic) IBOutlet UILabel *fromRideDriverNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fromRideLicenseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fromRidePickupTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fromRideStaticDriver;
+@property (weak, nonatomic) IBOutlet UILabel *fromRideStaticLicense;
+@property (weak, nonatomic) IBOutlet UILabel *fromRideStaticPickup;
 
 @property BOOL confirmed;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;

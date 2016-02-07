@@ -107,6 +107,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jO8-h5-Art">
                                 <rect key="frame" x="0.0" y="208" width="600" height="288"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vEh-uv-CCF">
+                                        <rect key="frame" x="20" y="19" width="560" height="250"/>
+                                        <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="250" id="9hP-XM-3Ij"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z54-hn-rXR">
                                         <rect key="frame" x="20" y="19" width="560" height="250"/>
                                         <subviews>
@@ -312,8 +319,11 @@
                                 <color key="backgroundColor" red="0.95849879140000005" green="0.95849879140000005" blue="0.95849879140000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Z54-hn-rXR" secondAttribute="trailing" constant="20" id="477-da-z8v"/>
+                                    <constraint firstItem="vEh-uv-CCF" firstAttribute="centerY" secondItem="jO8-h5-Art" secondAttribute="centerY" id="M36-OM-Z2m"/>
                                     <constraint firstItem="Z54-hn-rXR" firstAttribute="leading" secondItem="jO8-h5-Art" secondAttribute="leading" constant="20" id="O8k-zf-JbW"/>
+                                    <constraint firstItem="vEh-uv-CCF" firstAttribute="leading" secondItem="jO8-h5-Art" secondAttribute="leading" constant="20" id="TeJ-id-vEf"/>
                                     <constraint firstItem="Z54-hn-rXR" firstAttribute="centerY" secondItem="jO8-h5-Art" secondAttribute="centerY" id="bWG-yk-KFt"/>
+                                    <constraint firstAttribute="trailing" secondItem="vEh-uv-CCF" secondAttribute="trailing" constant="20" id="pja-i1-dzY"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOS-8D-MTO">
@@ -456,7 +466,14 @@
                         <outlet property="fromRideDriverNameLabel" destination="5Cb-1b-deo" id="Uvq-aD-7m7"/>
                         <outlet property="fromRideLicenseLabel" destination="zK4-ya-mIm" id="MtW-sZ-8ii"/>
                         <outlet property="fromRidePickupTimeLabel" destination="iht-Da-igw" id="hra-NA-6Ph"/>
+                        <outlet property="fromRideStaticDriver" destination="Jfa-Qp-NUh" id="dlA-va-WLw"/>
+                        <outlet property="fromRideStaticLicense" destination="N93-4A-4Ws" id="Xa8-1N-9nm"/>
+                        <outlet property="fromRideStaticPickup" destination="bOi-Kr-aGr" id="LaJ-3L-8cI"/>
+                        <outlet property="ride1View" destination="O17-do-q0O" id="lU0-yG-in1"/>
+                        <outlet property="ride2View" destination="bUD-4z-q7S" id="vbd-T5-X9F"/>
                         <outlet property="rideView" destination="Z54-hn-rXR" id="aQ3-Y2-i2s"/>
+                        <outlet property="separatorView" destination="Cgd-qd-ucc" id="Uof-Hl-DV2"/>
+                        <outlet property="shadowView" destination="vEh-uv-CCF" id="L4n-hz-pkD"/>
                         <outlet property="statusLabel" destination="28q-HT-rTP" id="3vC-ak-iaA"/>
                         <outlet property="takeoffTimeLabel" destination="AOI-TL-YDm" id="oqx-iT-inw"/>
                         <outlet property="toAirportCode" destination="3d4-8y-fP8" id="CYb-Iy-oWY"/>
@@ -466,11 +483,14 @@
                         <outlet property="toRideDriverNameLabel" destination="kah-U4-5ZW" id="sYY-xK-5vo"/>
                         <outlet property="toRideLicenseLabel" destination="R8R-K0-nI0" id="KuH-Ls-zwd"/>
                         <outlet property="toRidePickupTimeLabel" destination="uV6-zj-W5G" id="kjH-rc-2E5"/>
+                        <outlet property="toRideStaticDriver" destination="j1p-jT-Sv9" id="aRf-dh-cIM"/>
+                        <outlet property="toRideStaticLicense" destination="Gcl-Vo-y2V" id="WCb-vR-wlS"/>
+                        <outlet property="toRideStaticPickup" destination="jCn-Wv-RYe" id="P69-LG-077"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNx-Fe-rxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="537"/>
+            <point key="canvasLocation" x="1301" y="551"/>
         </scene>
     </scenes>
     <resources>
