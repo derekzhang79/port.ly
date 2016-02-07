@@ -35,7 +35,7 @@
 		C9223D631C66C0D40049C07C /* UberKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C9223D4F1C66C0D40049C07C /* UberKit.m */; };
 		C9223DA51C66C1180049C07C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9223DA41C66C1180049C07C /* AppDelegate.m */; };
 		C9223DA81C66C1AC0049C07C /* RequestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C9223DA71C66C1AC0049C07C /* RequestVC.m */; };
-		C9223DAB1C66C29E0049C07C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9223DA91C66C29E0049C07C /* main.m */; };
+		C9F77DED1C66C691000166B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DEC1C66C691000166B5 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,7 +118,7 @@
 		C9223DA41C66C1180049C07C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C9223DA61C66C1AC0049C07C /* RequestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestVC.h; sourceTree = "<group>"; };
 		C9223DA71C66C1AC0049C07C /* RequestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestVC.m; sourceTree = "<group>"; };
-		C9223DA91C66C29E0049C07C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C9F77DEC1C66C691000166B5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Port.ly/main.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,7 +275,7 @@
 		C9223DAA1C66C29E0049C07C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C9223DA91C66C29E0049C07C /* main.m */,
+				C9F77DEC1C66C691000166B5 /* main.m */,
 			);
 			name = "Supporting Files";
 			path = ../../../../../Desktop/test/test;
@@ -422,7 +422,7 @@
 				C9223D571C66C0D40049C07C /* NSString+NXOAuth2.m in Sources */,
 				C9223D541C66C0D40049C07C /* UberPromotion.m in Sources */,
 				C9223D5C1C66C0D40049C07C /* NXOAuth2Client.m in Sources */,
-				C9223DAB1C66C29E0049C07C /* main.m in Sources */,
+				C9F77DED1C66C691000166B5 /* main.m in Sources */,
 				C9223D5B1C66C0D40049C07C /* NXOAuth2AccountStore.m in Sources */,
 				C9223D501C66C0D40049C07C /* UberActivity.m in Sources */,
 				C9223D611C66C0D40049C07C /* NXOAuth2PostBodyStream.m in Sources */,
