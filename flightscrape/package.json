@@ -1,0 +1,11 @@
+{
+	"name"			: "flight-scrape",
+	"version"		: "0.0.1",
+	"description"	: "Flight info scraper",
+	"main"			: "flightscrape.js",
+	"author"		: "Martha and Zoe",
+	"dependencies"	: {
+		"request"	: "latest",
+		"cheerio"	: "latest"
+	}
+}
