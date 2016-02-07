@@ -15,6 +15,7 @@
 
 @implementation AppDelegate{
     CLLocation *currentLocation;
+	UberKit *uberKit;
 }
 
 
@@ -72,15 +73,14 @@
     }];
     
 	
-	UberKit *uberKit = [[UberKit alloc] initWithClientID:@"xHvfPvf0lGJ--RiPDo5D7j3DXYT7Vq7W" ClientSecret:@"BHutgVeczuhDjLvjSpBmWIIltdc2GyBq0Hw9NR_R" RedirectURL:@"portly://uber.com" ApplicationName:@"Port.ly"]; //Set these fields from your app on Uber Developers.
+	uberKit = [[UberKit alloc] initWithClientID:@"xHvfPvf0lGJ--RiPDo5D7j3DXYT7Vq7W" ClientSecret:@"BHutgVeczuhDjLvjSpBmWIIltdc2GyBq0Hw9NR_R" RedirectURL:@"portly://uber.com" ApplicationName:@"Port.ly"];
 	uberKit.delegate = self; //Set the delegate (only for login)
+//	[uberKit.delegate uberKit:uberKit didReceiveAccessToken:@"A"];//TEST
 	
 	[uberKit startLogin];
 	
 	return YES;
 }
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -105,6 +105,7 @@
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+	[[UberKit sharedInstance] handleLoginRedirectFromUrl:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
 	return YES;
 }
 
@@ -123,9 +124,11 @@
         }
     }];
 	
+	NSLog(@"Token: %@", accessToken);
 }
 - (void) uberKit: (UberKit *) uberKit loginFailedWithError: (NSError *) error {
 	//An error occurred in the login process
+	NSLog(@"NOPE");
 }
 
 @end
