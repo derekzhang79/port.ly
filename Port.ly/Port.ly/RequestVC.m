@@ -16,7 +16,7 @@
     CLLocation *currentLocation;
 }
 
-//@synthesize mapView = _mapView;
+@synthesize mapView = _mapView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,12 +35,13 @@
     self.mapView.showsBuildings = YES;
     self.mapView.delegate = self;
 //[self.mapView setDelegate:self];
+    self.mapView.userTrackingMode = MKUserTrackingModeFollow;
     [self.view addSubview:mapView];
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-    [mapView setRegion:MKCoordinateRegionMake(currentLocation.coordinate,MKCoordinateSpanMake(0.02, 0.02)) animated:YES];
-}
+//- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+  //  [mapView setRegion:MKCoordinateRegionMake(currentLocation.coordinate,MKCoordinateSpanMake(0.02, 0.02)) animated:YES];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

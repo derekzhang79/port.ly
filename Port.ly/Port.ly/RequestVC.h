@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *flightNumTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *reservationTypeControl;
+@property (strong, nonatomic) CLLocation *initialLocation;
 
 @end
