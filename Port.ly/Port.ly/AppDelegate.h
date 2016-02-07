@@ -10,7 +10,7 @@
 #import "UberKit.h"
 #import <MicrosoftAzureMobile/MicrosoftAzureMobile.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UberKitDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UberKitDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MSClient *client;

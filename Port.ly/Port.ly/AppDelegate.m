@@ -10,7 +10,7 @@
 //#import <CoreLocation/CoreLocation.h>
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
 @implementation AppDelegate{
@@ -24,6 +24,7 @@
     
     self.client = [MSClient
                    clientWithApplicationURLString:@"https://portly.azurewebsites.net"];
+    MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
     
     //send location
   //  [[NSNotificationCenter defaultCenter] addObserverForName:@"currentLocationUpdated" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note){
@@ -34,36 +35,26 @@
     //[defaults setObject:longitude forKey:@"starLongitude"];
     //[defaults synchronize];
     
-   // MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
     
-    /*
-    //send longitude
-    NSDictionary *item1 = @{ @"startLat" : [defaults objectForKey:@"starLatitude"] };
-    MSTable *itemTable1 = [client tableWithName:@"Flight"];
-    [itemTable1 insert:item1 completion:^(NSDictionary *insertedItem, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
-        }
-    }];
-    //send longitude
-    NSDictionary *item2 = @{ @"startLon" : [defaults objectForKey:@"starLongitude"] };
-    MSTable *itemTable2 = [client tableWithName:@"Flight"];
-    [itemTable2 insert:item2 completion:^(NSDictionary *insertedItem, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
-        }
-    }];
-     */
+
         
    // }];
     
-    MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
-    NSDictionary *item = @{ @"uber" : @"LAEL PLS" };
-    MSTable *itemTable = [client tableWithName:@"User"];
+    //sending location
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
+    //send latitude
+    NSDictionary *item = @{ @"startLat" : [NSString stringWithFormat:@"%f",self.locationManager.location.coordinate.latitude], @"startLon" : [NSString stringWithFormat:@"%f",self.locationManager.location.coordinate.longitude], @"userID" : [[[UIDevice currentDevice] identifierForVendor] UUIDString] };
+    MSTable *itemTable = [client tableWithName:@"Flight"];
     [itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
         if (error) {
             NSLog(@"Error: %@", error);
@@ -72,6 +63,7 @@
         }
     }];
     
+    [self.locationManager stopUpdatingLocation];
 	
 	uberKit = [[UberKit alloc] initWithClientID:@"xHvfPvf0lGJ--RiPDo5D7j3DXYT7Vq7W" ClientSecret:@"BHutgVeczuhDjLvjSpBmWIIltdc2GyBq0Hw9NR_R" RedirectURL:@"portly://uber.com" ApplicationName:@"Port.ly"];
 	uberKit.delegate = self; //Set the delegate (only for login)
@@ -113,7 +105,7 @@
 
 - (void) uberKit: (UberKit *) uberKit didReceiveAccessToken: (NSString *) accessToken {
 	//Got the access token, can now make requests for user data
-    MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
+   /* MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
     NSDictionary *item = @{ @"uber" : accessToken };
     MSTable *itemTable = [client tableWithName:@"User"];
     [itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
@@ -125,6 +117,7 @@
     }];
 	
 	NSLog(@"Token: %@", accessToken);
+    */
 }
 - (void) uberKit: (UberKit *) uberKit loginFailedWithError: (NSError *) error {
 	//An error occurred in the login process
