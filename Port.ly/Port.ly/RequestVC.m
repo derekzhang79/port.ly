@@ -24,10 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    locationManager = [CLLocationManager new];
-    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [locationManager requestWhenInUseAuthorization];
-    }
+  //  locationManager = [CLLocationManager new];
+  //  if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+  //      [locationManager requestWhenInUseAuthorization];
+  //  }
 //    self.mapView = [[MKMapView alloc]
 //               initWithFrame:CGRectMake(0,
 //                                        0,
@@ -94,9 +94,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     currentLocation = locations.lastObject;
-}
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"currentLocationUpdated" object:self userInfo:@{@"currentLocation" : currentLocation}];
+    NSLog(@"location");
+}*/
 
 - (IBAction)mapTapped:(id)sender {
 	[self.flightNumTextField resignFirstResponder];

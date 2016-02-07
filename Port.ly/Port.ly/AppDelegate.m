@@ -7,16 +7,70 @@
 //
 
 #import "AppDelegate.h"
+//#import <CoreLocation/CoreLocation.h>
 
 @interface AppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate{
+    CLLocation *currentLocation;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
+    
+    self.client = [MSClient
+                   clientWithApplicationURLString:@"https://portly.azurewebsites.net"];
+    
+    //send location
+  //  [[NSNotificationCenter defaultCenter] addObserverForName:@"currentLocationUpdated" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note){
+    //    currentLocation = note.userInfo[@"currentLocation"];
+    
+   // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //[defaults setObject:latitude forKey:@"starLatitude"];
+    //[defaults setObject:longitude forKey:@"starLongitude"];
+    //[defaults synchronize];
+    
+   // MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
+    
+    /*
+    //send longitude
+    NSDictionary *item1 = @{ @"startLat" : [defaults objectForKey:@"starLatitude"] };
+    MSTable *itemTable1 = [client tableWithName:@"Flight"];
+    [itemTable1 insert:item1 completion:^(NSDictionary *insertedItem, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
+        }
+    }];
+    //send longitude
+    NSDictionary *item2 = @{ @"startLon" : [defaults objectForKey:@"starLongitude"] };
+    MSTable *itemTable2 = [client tableWithName:@"Flight"];
+    [itemTable2 insert:item2 completion:^(NSDictionary *insertedItem, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
+        }
+    }];
+     */
+        
+   // }];
+    
+    MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
+    NSDictionary *item = @{ @"uber" : @"LAEL PLS" };
+    MSTable *itemTable = [client tableWithName:@"User"];
+    [itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
+        }
+    }];
+    
 	
 	UberKit *uberKit = [[UberKit alloc] initWithClientID:@"xHvfPvf0lGJ--RiPDo5D7j3DXYT7Vq7W" ClientSecret:@"BHutgVeczuhDjLvjSpBmWIIltdc2GyBq0Hw9NR_R" RedirectURL:@"portly://uber.com" ApplicationName:@"Port.ly"]; //Set these fields from your app on Uber Developers.
 	uberKit.delegate = self; //Set the delegate (only for login)
@@ -58,6 +112,16 @@
 
 - (void) uberKit: (UberKit *) uberKit didReceiveAccessToken: (NSString *) accessToken {
 	//Got the access token, can now make requests for user data
+    MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
+    NSDictionary *item = @{ @"uber" : accessToken };
+    MSTable *itemTable = [client tableWithName:@"User"];
+    [itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
+        }
+    }];
 	
 }
 - (void) uberKit: (UberKit *) uberKit loginFailedWithError: (NSError *) error {
