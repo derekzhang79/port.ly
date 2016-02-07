@@ -10,7 +10,6 @@
 //#import <CoreLocation/CoreLocation.h>
 
 @interface AppDelegate ()
-@property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
 @implementation AppDelegate{
@@ -22,24 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
     
-    self.client = [MSClient
-                   clientWithApplicationURLString:@"https://portly.azurewebsites.net"];
-    MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
-    
-    //send location
-  //  [[NSNotificationCenter defaultCenter] addObserverForName:@"currentLocationUpdated" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note){
-    //    currentLocation = note.userInfo[@"currentLocation"];
-    
-   // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //[defaults setObject:latitude forKey:@"starLatitude"];
-    //[defaults setObject:longitude forKey:@"starLongitude"];
-    //[defaults synchronize];
-    
-    
+    self.client = [MSClient clientWithApplicationURLString:@"https://portly.azurewebsites.net"];
 
-        
-   // }];
-    
     //sending location
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -51,19 +34,6 @@
         [self.locationManager requestAlwaysAuthorization];
     }
     [self.locationManager startUpdatingLocation];
-    
-    //send latitude
-    NSDictionary *item = @{ @"startLat" : [NSString stringWithFormat:@"%f",self.locationManager.location.coordinate.latitude], @"startLon" : [NSString stringWithFormat:@"%f",self.locationManager.location.coordinate.longitude], @"userID" : [[[UIDevice currentDevice] identifierForVendor] UUIDString] };
-    MSTable *itemTable = [client tableWithName:@"Flight"];
-    [itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
-        }
-    }];
-    
-    [self.locationManager stopUpdatingLocation];
 	
 	uberKit = [[UberKit alloc] initWithClientID:@"xHvfPvf0lGJ--RiPDo5D7j3DXYT7Vq7W" ClientSecret:@"BHutgVeczuhDjLvjSpBmWIIltdc2GyBq0Hw9NR_R" RedirectURL:@"portly://uber.com" ApplicationName:@"Port.ly"];
 	uberKit.delegate = self; //Set the delegate (only for login)

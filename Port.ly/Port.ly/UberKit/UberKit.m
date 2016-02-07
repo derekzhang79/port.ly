@@ -24,6 +24,7 @@
 //
 
 #import "UberKit.h"
+#import "AppDelegate.h"
 
 NSString * const baseURL = @"https://api.uber.com/v1";
 NSString * const mobile_safari_string = @"com.apple.mobilesafari";
@@ -307,8 +308,21 @@ NSString * const mobile_safari_string = @"com.apple.mobilesafari";
                     [self.delegate uberKit:self didReceiveAccessToken:_accessToken];
                 }
 				
-				//GOT THE TOKEN!
+				//GOT THE TOKEN
 				
+				MSClient *client = [(AppDelegate *) [[UIApplication sharedApplication] delegate] client];
+				
+				NSLog(@"ID: %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+				NSDictionary *item = @{ @"uber" : _accessToken, @"userID" : [[[UIDevice currentDevice] identifierForVendor] UUIDString] };
+				MSTable *itemTable = [client tableWithName:@"User"];
+				[itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
+					if (error) {
+						NSLog(@"Error: %@", error);
+					} else {
+						NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
+						NSLog(@"BAM: %@", _accessToken);
+					}
+				}];
             }
         }
         else

@@ -19,6 +19,8 @@
 @property NSString *toAirportCode;
 @property NSDate *takeoffTimeScheduled;
 @property NSDate *takeoffTimeReal;
+@property NSDate *arrivalTimeScheduled;
+@property NSDate *arrivalTimeReal;
 @property NSDate *toRidePickupTime;//ride to "fromAirport"
 @property NSDate *fromRidePickupTime;//ride from "toAirport"
 
