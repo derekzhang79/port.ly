@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface RequestVC : UIViewController
+@interface RequestVC : UIViewController{
+    MKMapView *mapview;
+}
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
 @end

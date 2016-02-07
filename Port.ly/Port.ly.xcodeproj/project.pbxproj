@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23F78F3F1C66C49900431C78 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23F78F3E1C66C49900431C78 /* MapKit.framework */; };
 		BE1138311C668BBF000CFEAC /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1138301C668BBF000CFEAC /* MicrosoftAzureMobile.framework */; };
 		C9223CF71C667B430049C07C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9223CF51C667B430049C07C /* Main.storyboard */; };
 		C9223CF91C667B430049C07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9223CF81C667B430049C07C /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23F78F3E1C66C49900431C78 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BE1138301C668BBF000CFEAC /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 		C9223CEE1C667B430049C07C /* Port.ly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Port.ly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9223CF61C667B430049C07C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23F78F3F1C66C49900431C78 /* MapKit.framework in Frameworks */,
 				BE1138311C668BBF000CFEAC /* MicrosoftAzureMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +153,7 @@
 		C9223CE51C667B430049C07C = {
 			isa = PBXGroup;
 			children = (
+				23F78F3E1C66C49900431C78 /* MapKit.framework */,
 				C9223CF01C667B430049C07C /* Port.ly */,
 				C9223D051C667B430049C07C /* Port.lyTests */,
 				C9223D101C667B430049C07C /* Port.lyUITests */,
