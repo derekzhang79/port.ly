@@ -37,7 +37,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="xgQ-qk-Ot9" kind="presentation" id="lzP-Fa-umx"/>
+                                    <segue destination="xbq-Tb-058" kind="presentation" identifier="modalReservationVC" id="nPB-2G-tFC"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="c9h-8r-DuM">
@@ -69,33 +69,19 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="flightNumTextField" destination="zNq-KK-pjG" id="sG3-SR-tLL"/>
                         <outlet property="mapView" destination="x4N-1d-bFo" id="MwY-hk-ZpW"/>
+                        <outlet property="reservationTypeControl" destination="c9h-8r-DuM" id="Tq9-va-hdK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="565" y="537"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Dk4-wa-T1n">
-            <objects>
-                <navigationController id="xgQ-qk-Ot9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tl0-Lh-JO2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="xbq-Tb-058" kind="relationship" relationship="rootViewController" id="ZY3-qY-ueM"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cvU-oa-lcE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1335" y="537"/>
-        </scene>
         <!--Reservation-->
         <scene sceneID="iBC-jS-mfS">
             <objects>
-                <viewController id="xbq-Tb-058" sceneMemberID="viewController">
+                <viewController id="xbq-Tb-058" customClass="ReservationVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lcs-ks-OyE"/>
                         <viewControllerLayoutGuide type="bottom" id="AIf-ky-GfY"/>
@@ -105,10 +91,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jO8-h5-Art">
-                                <rect key="frame" x="0.0" y="252" width="600" height="244"/>
+                                <rect key="frame" x="0.0" y="208" width="600" height="288"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z54-hn-rXR">
-                                        <rect key="frame" x="20" y="-3" width="560" height="250"/>
+                                        <rect key="frame" x="20" y="19" width="560" height="250"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O17-do-q0O">
                                                 <rect key="frame" x="0.0" y="50" width="560" height="100"/>
@@ -311,7 +297,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOS-8D-MTO">
-                                <rect key="frame" x="20" y="72" width="560" height="172"/>
+                                <rect key="frame" x="20" y="28" width="560" height="172"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRV-vC-11D">
                                         <rect key="frame" x="8" y="8" width="544" height="20.5"/>
@@ -403,6 +389,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="0.22343531029068053" blue="0.21905447588696358" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancel:" destination="xbq-Tb-058" eventType="touchUpInside" id="Lgt-Oy-J3z"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukE-fQ-1lb">
                                 <rect key="frame" x="20" y="504" width="560" height="50"/>
@@ -413,6 +402,9 @@
                                 <state key="normal" title="Confirm">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="confirm:" destination="xbq-Tb-058" eventType="touchUpInside" id="n2n-zD-0z7"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9584987914364641" green="0.9584987914364641" blue="0.9584987914364641" alpha="1" colorSpace="calibratedRGB"/>
@@ -429,14 +421,34 @@
                             <constraint firstItem="ukE-fQ-1lb" firstAttribute="top" secondItem="jO8-h5-Art" secondAttribute="bottom" constant="8" id="oJL-5Z-ufK"/>
                             <constraint firstItem="ukE-fQ-1lb" firstAttribute="trailing" secondItem="5O4-n0-SFm" secondAttribute="trailingMargin" id="og2-bO-gQd"/>
                             <constraint firstItem="AIf-ky-GfY" firstAttribute="top" secondItem="ukE-fQ-1lb" secondAttribute="bottom" constant="46" id="tig-8n-IBT"/>
-                            <constraint firstItem="jOS-8D-MTO" firstAttribute="top" secondItem="lcs-ks-OyE" secondAttribute="bottom" constant="8" id="vP2-5R-kyT"/>
+                            <constraint firstItem="jOS-8D-MTO" firstAttribute="top" secondItem="lcs-ks-OyE" secondAttribute="bottom" constant="8" symbolic="YES" id="vP2-5R-kyT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reservation" id="HY9-On-Fw3"/>
+                    <connections>
+                        <outlet property="airlineLabel" destination="JRV-vC-11D" id="CmZ-a1-5ij"/>
+                        <outlet property="confirmButton" destination="ukE-fQ-1lb" id="anV-e4-SPv"/>
+                        <outlet property="fromAirportCode" destination="aX8-Iz-MPU" id="HHN-dy-zdg"/>
+                        <outlet property="fromAirportFull" destination="KlB-3s-LSO" id="SqV-cR-Oeg"/>
+                        <outlet property="fromRideAirportLabel" destination="9Ki-2r-Ual" id="2QS-j3-Zsx"/>
+                        <outlet property="fromRideDriverImageView" destination="kvy-YA-bog" id="8gF-gn-tKk"/>
+                        <outlet property="fromRideDriverNameLabel" destination="5Cb-1b-deo" id="Uvq-aD-7m7"/>
+                        <outlet property="fromRideLicenseLabel" destination="zK4-ya-mIm" id="MtW-sZ-8ii"/>
+                        <outlet property="fromRidePickupTimeLabel" destination="iht-Da-igw" id="hra-NA-6Ph"/>
+                        <outlet property="statusLabel" destination="28q-HT-rTP" id="3vC-ak-iaA"/>
+                        <outlet property="takeoffTimeLabel" destination="AOI-TL-YDm" id="oqx-iT-inw"/>
+                        <outlet property="toAirportCode" destination="3d4-8y-fP8" id="CYb-Iy-oWY"/>
+                        <outlet property="toAirportFull" destination="DAp-8s-eEK" id="wDb-Fy-L7b"/>
+                        <outlet property="toRideAirportLabel" destination="BsD-RF-AUI" id="bJd-nc-RNf"/>
+                        <outlet property="toRideDriverImageView" destination="0L6-Pd-wC8" id="Cte-2c-LqK"/>
+                        <outlet property="toRideDriverNameLabel" destination="kah-U4-5ZW" id="sYY-xK-5vo"/>
+                        <outlet property="toRideLicenseLabel" destination="R8R-K0-nI0" id="KuH-Ls-zwd"/>
+                        <outlet property="toRidePickupTimeLabel" destination="uV6-zj-W5G" id="kjH-rc-2E5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNx-Fe-rxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2093" y="537"/>
+            <point key="canvasLocation" x="1292" y="537"/>
         </scene>
     </scenes>
     <resources>

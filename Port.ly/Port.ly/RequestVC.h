@@ -12,5 +12,7 @@
 @interface RequestVC : UIViewController
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UITextField *flightNumTextField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *reservationTypeControl;
 
 @end
