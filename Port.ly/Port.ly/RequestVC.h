@@ -23,5 +23,6 @@
 @property (strong, nonatomic) CLLocation *initialLocation;
 
 - (IBAction)mapTapped:(id)sender;
+- (IBAction)go:(id)sender;
 
 @end

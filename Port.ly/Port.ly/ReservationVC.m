@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	
+	[self.toRideDriverNameLabel setText:@"(pending)"];
+	[self.toRideLicenseLabel setText:@""];
+	[self.fromRideDriverNameLabel setText:@"(pending)"];
+	[self.fromRideLicenseLabel setText:@""];
 }
 
 - (void)didReceiveMemoryWarning {

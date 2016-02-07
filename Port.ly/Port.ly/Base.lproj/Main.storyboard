@@ -26,7 +26,7 @@
                                     <outletCollection property="gestureRecognizers" destination="aRn-f5-RC7" appends="YES" id="31N-RV-IDP"/>
                                 </connections>
                             </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Flight #" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNq-KK-pjG">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Flight Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNq-KK-pjG">
                                 <rect key="frame" x="20" y="28" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -41,7 +41,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="xbq-Tb-058" kind="presentation" identifier="modalReservationVC" id="nPB-2G-tFC"/>
+                                    <action selector="go:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lsq-LH-Px9"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="c9h-8r-DuM">
@@ -77,6 +77,7 @@
                         <outlet property="goButton" destination="pZc-tA-mcc" id="0qI-uL-Mm7"/>
                         <outlet property="mapView" destination="x4N-1d-bFo" id="MwY-hk-ZpW"/>
                         <outlet property="reservationTypeControl" destination="c9h-8r-DuM" id="Tq9-va-hdK"/>
+                        <segue destination="xbq-Tb-058" kind="presentation" identifier="modalReservationVC" id="Bqe-1L-iuT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

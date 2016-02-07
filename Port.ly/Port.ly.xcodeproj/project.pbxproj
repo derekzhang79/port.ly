@@ -38,6 +38,9 @@
 		C9223DA81C66C1AC0049C07C /* RequestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C9223DA71C66C1AC0049C07C /* RequestVC.m */; };
 		C9F77DED1C66C691000166B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DEC1C66C691000166B5 /* main.m */; };
 		C9F77DF01C66C838000166B5 /* ReservationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DEF1C66C838000166B5 /* ReservationVC.m */; };
+		C9F77DF31C66FCBB000166B5 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DF21C66FCBB000166B5 /* LoadingView.m */; };
+		C9F77DFA1C66FCF0000166B5 /* NGAParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DF91C66FCF0000166B5 /* NGAParallaxMotion.m */; };
+		C9F77DFD1C67032D000166B5 /* Flight.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DFC1C67032D000166B5 /* Flight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +127,12 @@
 		C9F77DEC1C66C691000166B5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Port.ly/main.m; sourceTree = SOURCE_ROOT; };
 		C9F77DEE1C66C838000166B5 /* ReservationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReservationVC.h; sourceTree = "<group>"; };
 		C9F77DEF1C66C838000166B5 /* ReservationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReservationVC.m; sourceTree = "<group>"; };
+		C9F77DF11C66FCBB000166B5 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		C9F77DF21C66FCBB000166B5 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		C9F77DF81C66FCF0000166B5 /* NGAParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGAParallaxMotion.h; sourceTree = "<group>"; };
+		C9F77DF91C66FCF0000166B5 /* NGAParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGAParallaxMotion.m; sourceTree = "<group>"; };
+		C9F77DFB1C67032D000166B5 /* Flight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flight.h; sourceTree = "<group>"; };
+		C9F77DFC1C67032D000166B5 /* Flight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flight.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,15 +186,20 @@
 		C9223CF01C667B430049C07C /* Port.ly */ = {
 			isa = PBXGroup;
 			children = (
+				C9F77DF61C66FCD7000166B5 /* NGAParallaxMotion */,
 				C9223D1F1C66C0D40049C07C /* UberKit */,
 				BE1138301C668BBF000CFEAC /* MicrosoftAzureMobile.framework */,
 				C9223CF51C667B430049C07C /* Main.storyboard */,
+				C9F77DFB1C67032D000166B5 /* Flight.h */,
+				C9F77DFC1C67032D000166B5 /* Flight.m */,
 				C9223DA31C66C1180049C07C /* AppDelegate.h */,
 				C9223DA41C66C1180049C07C /* AppDelegate.m */,
 				C9223DA61C66C1AC0049C07C /* RequestVC.h */,
 				C9223DA71C66C1AC0049C07C /* RequestVC.m */,
 				C9F77DEE1C66C838000166B5 /* ReservationVC.h */,
 				C9F77DEF1C66C838000166B5 /* ReservationVC.m */,
+				C9F77DF11C66FCBB000166B5 /* LoadingView.h */,
+				C9F77DF21C66FCBB000166B5 /* LoadingView.m */,
 				C9223CF81C667B430049C07C /* Assets.xcassets */,
 				C9223CFA1C667B430049C07C /* LaunchScreen.storyboard */,
 				C9223CFD1C667B430049C07C /* Info.plist */,
@@ -288,6 +302,16 @@
 			);
 			name = "Supporting Files";
 			path = ../../../../../Desktop/test/test;
+			sourceTree = "<group>";
+		};
+		C9F77DF61C66FCD7000166B5 /* NGAParallaxMotion */ = {
+			isa = PBXGroup;
+			children = (
+				C9F77DF81C66FCF0000166B5 /* NGAParallaxMotion.h */,
+				C9F77DF91C66FCF0000166B5 /* NGAParallaxMotion.m */,
+			);
+			name = NGAParallaxMotion;
+			path = "../../../../../Documents/Chorus/CHORUS_BACKUP 2:3:16/chorus/trunk/Chorus/Chorus";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +453,7 @@
 				C9223D521C66C0D40049C07C /* UberProduct.m in Sources */,
 				C9223D5D1C66C0D40049C07C /* NXOAuth2Connection.m in Sources */,
 				C9223D571C66C0D40049C07C /* NSString+NXOAuth2.m in Sources */,
+				C9F77DFD1C67032D000166B5 /* Flight.m in Sources */,
 				C9223D541C66C0D40049C07C /* UberPromotion.m in Sources */,
 				C9223D5C1C66C0D40049C07C /* NXOAuth2Client.m in Sources */,
 				C9F77DED1C66C691000166B5 /* main.m in Sources */,
@@ -437,10 +462,12 @@
 				C9F77DF01C66C838000166B5 /* ReservationVC.m in Sources */,
 				C9223D611C66C0D40049C07C /* NXOAuth2PostBodyStream.m in Sources */,
 				C9223D561C66C0D40049C07C /* NSData+NXOAuth2.m in Sources */,
+				C9F77DF31C66FCBB000166B5 /* LoadingView.m in Sources */,
 				C9223D581C66C0D40049C07C /* NSURL+NXOAuth2.m in Sources */,
 				C9223D511C66C0D40049C07C /* UberPrice.m in Sources */,
 				C9223D5F1C66C0D40049C07C /* NXOAuth2FileStreamWrapper.m in Sources */,
 				C9223D591C66C0D40049C07C /* NXOAuth2AccessToken.m in Sources */,
+				C9F77DFA1C66FCF0000166B5 /* NGAParallaxMotion.m in Sources */,
 				C9223D531C66C0D40049C07C /* UberProfile.m in Sources */,
 				C9223D631C66C0D40049C07C /* UberKit.m in Sources */,
 				C9223D5A1C66C0D40049C07C /* NXOAuth2Account.m in Sources */,

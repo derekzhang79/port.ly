@@ -7,6 +7,8 @@
 //
 
 #import "RequestVC.h"
+#import "ReservationVC.h"
+#import "LoadingView.h"
 
 @interface RequestVC ()
 
@@ -14,6 +16,7 @@
 
 @implementation RequestVC {
     CLLocation *currentLocation;
+	LoadingView *loadingView;
 }
 
 @synthesize mapView = _mapView;
@@ -41,6 +44,45 @@
 	[self.reservationTypeControl.layer setCornerRadius:3];
 	[self.goButton.layer setCornerRadius:3];
 	[self.goButton setClipsToBounds:YES];
+	
+	loadingView = [[LoadingView alloc]initWithFrame:self.view.bounds];
+	[self.view addSubview:loadingView];
+}
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	[[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardWillShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note){
+		[self slideViewForKeyboard:note];
+	}];
+	[[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardWillHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note){
+		[self slideViewForKeyboard:note];
+	}];
+}
+- (void)slideViewForKeyboard:(NSNotification *)note {
+	NSDictionary* userInfo = [note userInfo];
+	
+	// Get animation info from userInfo
+	NSTimeInterval animationDuration;
+	UIViewAnimationCurve animationCurve;
+	CGRect keyboardEndFrame;
+	
+	[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+	[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+	[[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+	
+	CGRect newFrame = CGRectMake(self.view.frame.origin.x,
+								 self.view.frame.origin.y,
+								 self.view.frame.size.width,
+								 keyboardEndFrame.origin.y);
+	
+	if (animationDuration == 0) {
+		animationDuration = 0.12;
+	}
+	
+	[UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+		[self.view setFrame:newFrame];
+		[self.view layoutIfNeeded];
+	} completion:NULL];
 }
 
 //- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
@@ -56,17 +98,30 @@
     currentLocation = locations.lastObject;
 }
 
-/*
+- (IBAction)mapTapped:(id)sender {
+	[self.flightNumTextField resignFirstResponder];
+}
+
+- (IBAction)go:(id)sender {
+	
+	
+	[self performSegueWithIdentifier:@"modalReservationVC" sender:self];
+}
+
+- (void)receiveFlightData:(NSDictionary *)flightData {
+	
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	ReservationVC *reservationVC = segue.destinationViewController;
+	
+	
 }
-*/
 
-- (IBAction)mapTapped:(id)sender {
-	[self resignFirstResponder];
-}
+
+
 @end
