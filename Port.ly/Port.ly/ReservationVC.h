@@ -8,7 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class Flight;
+@class Ride;
+
 @interface ReservationVC : UIViewController
+
+@property Flight *flight;
+
+- (void)setupWithFlight:(Flight *)flight;
+- (void)setupToRide:(Ride *)ride;
+- (void)setupFromRide:(Ride *)ride;
+
+@property (weak, nonatomic) IBOutlet UIView *flightView;
 
 @property (weak, nonatomic) IBOutlet UILabel *airlineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fromAirportFull;
@@ -17,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *toAirportCode;
 @property (weak, nonatomic) IBOutlet UILabel *takeoffTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *rideView;
 
 @property (weak, nonatomic) IBOutlet UILabel *toRideAirportLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *toRideDriverImageView;
@@ -30,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *fromRideLicenseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fromRidePickupTimeLabel;
 
+@property BOOL confirmed;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 - (IBAction)confirm:(id)sender;
 

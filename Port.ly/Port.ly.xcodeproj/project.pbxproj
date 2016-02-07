@@ -41,6 +41,7 @@
 		C9F77DF31C66FCBB000166B5 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DF21C66FCBB000166B5 /* LoadingView.m */; };
 		C9F77DFD1C67032D000166B5 /* Flight.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DFC1C67032D000166B5 /* Flight.m */; };
 		C9F77E001C6704C0000166B5 /* NGAParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77DFF1C6704C0000166B5 /* NGAParallaxMotion.m */; };
+		C9F77E031C6705B7000166B5 /* Ride.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F77E021C6705B7000166B5 /* Ride.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,8 @@
 		C9F77DFC1C67032D000166B5 /* Flight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flight.m; sourceTree = "<group>"; };
 		C9F77DFE1C6704C0000166B5 /* NGAParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGAParallaxMotion.h; sourceTree = "<group>"; };
 		C9F77DFF1C6704C0000166B5 /* NGAParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGAParallaxMotion.m; sourceTree = "<group>"; };
+		C9F77E011C6705B7000166B5 /* Ride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ride.h; sourceTree = "<group>"; };
+		C9F77E021C6705B7000166B5 /* Ride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ride.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +196,8 @@
 				C9F77DFF1C6704C0000166B5 /* NGAParallaxMotion.m */,
 				C9F77DFB1C67032D000166B5 /* Flight.h */,
 				C9F77DFC1C67032D000166B5 /* Flight.m */,
+				C9F77E011C6705B7000166B5 /* Ride.h */,
+				C9F77E021C6705B7000166B5 /* Ride.m */,
 				C9223DA31C66C1180049C07C /* AppDelegate.h */,
 				C9223DA41C66C1180049C07C /* AppDelegate.m */,
 				C9223DA61C66C1AC0049C07C /* RequestVC.h */,
@@ -445,6 +450,7 @@
 				C9223D5D1C66C0D40049C07C /* NXOAuth2Connection.m in Sources */,
 				C9223D571C66C0D40049C07C /* NSString+NXOAuth2.m in Sources */,
 				C9F77DFD1C67032D000166B5 /* Flight.m in Sources */,
+				C9F77E031C6705B7000166B5 /* Ride.m in Sources */,
 				C9223D541C66C0D40049C07C /* UberPromotion.m in Sources */,
 				C9223D5C1C66C0D40049C07C /* NXOAuth2Client.m in Sources */,
 				C9F77DED1C66C691000166B5 /* main.m in Sources */,

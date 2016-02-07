@@ -9,6 +9,7 @@
 #import "RequestVC.h"
 #import "ReservationVC.h"
 #import "LoadingView.h"
+#import "Flight.h"
 
 @interface RequestVC ()
 
@@ -17,14 +18,16 @@
 @implementation RequestVC {
     CLLocation *currentLocation;
 	LoadingView *loadingView;
+	Flight *tempFlight;
 }
 
 @synthesize mapView = _mapView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    locationManager = [CLLocationManager new];
+	tempFlight = [[Flight alloc]init];
+	
+	locationManager = [CLLocationManager new];
     if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [locationManager requestWhenInUseAuthorization];
     }
@@ -41,7 +44,7 @@
     self.mapView.userTrackingMode = MKUserTrackingModeFollow;
     [self.view addSubview:mapView];
 	
-	[self.reservationTypeControl.layer setCornerRadius:3];
+	[self.reservationTypeControl.layer setCornerRadius:5];
 	[self.goButton.layer setCornerRadius:3];
 	[self.goButton setClipsToBounds:YES];
 	
@@ -103,13 +106,30 @@
 }
 
 - (IBAction)go:(id)sender {
+	//send flight number to server
 	
-	
-	[self performSegueWithIdentifier:@"modalReservationVC" sender:self];
+//	[loadingView show];
+//	[loadingView setState:LoadingStateLoading];
+//	[loadingView setMessage:@"Finding flight..."];
+
+	[self performSegueWithIdentifier:@"modalReservationVC" sender:self];//TEST
 }
 
 - (void)receiveFlightData:(NSDictionary *)flightData {
+	//setup tempFlight with flight Data
+	[tempFlight setAirline:flightData[@"airline"]];
+	[tempFlight setFromAirport:flightData[@"from_airport"]];
+	[tempFlight setToAirport:flightData[@"to_airport"]];
+	[tempFlight setFromAirportCode:flightData[@"fromAirportCode"]];
+	[tempFlight setToAirportCode:flightData[@"toAirportCode"]];
+	[tempFlight setTakeoffTimeScheduled:flightData[@"takeoff_time_scheduled"]];
+	[tempFlight setTakeoffTimeReal:flightData[@"takeoff_time_real"]];
+	[tempFlight setToRidePickupTime:flightData[@"to_ride_pickup_time"]];
+	[tempFlight setFromRidePickupTime:flightData[@"from_ride_pickup_time"]];
+
+	[loadingView hide];
 	
+	[self performSegueWithIdentifier:@"modalReservationVC" sender:self];
 }
 
 
@@ -118,10 +138,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	ReservationVC *reservationVC = segue.destinationViewController;
-	
-	
+	[reservationVC setupWithFlight:tempFlight];
 }
-
-
 
 @end

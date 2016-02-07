@@ -252,7 +252,8 @@ NSString * const mobile_safari_string = @"com.apple.mobilesafari";
 
 - (BOOL) handleLoginRedirectFromUrl:(NSURL *)url sourceApplication:(NSString *)sourceApplication
 {
-    if ([sourceApplication isEqualToString:mobile_safari_string] && [url.absoluteURL.host hasPrefix:_redirectURL])
+//    if ([sourceApplication isEqualToString:mobile_safari_string] && [url.absoluteURL.host hasPrefix:_redirectURL])
+	if ([sourceApplication isEqualToString:mobile_safari_string])
     {
         NSString *code = nil;
         NSArray *urlParams = [[url query] componentsSeparatedByString:@"&"];
@@ -283,7 +284,7 @@ NSString * const mobile_safari_string = @"com.apple.mobilesafari";
 
 - (void) getAuthTokenForCode: (NSString *) code
 {
-    NSString *data = [NSString stringWithFormat:@"code=%@&client_id=%@&client_secret=%@&redirect_uri=%@&grant_type=authorization_code", code, _clientID, _clientSecret, _redirectURL];
+    NSString *data = [NSString stringWithFormat:@"code=%@&client_id=%@&client_secret=%@&redirect_uri=%@&grant_type=authorization_code", code, @"xHvfPvf0lGJ--RiPDo5D7j3DXYT7Vq7W", @"BHutgVeczuhDjLvjSpBmWIIltdc2GyBq0Hw9NR_R", @"portly://uber.com"];
     NSString *url = [NSString stringWithFormat:@"https://login.uber.com/oauth/token"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"POST"];
@@ -305,6 +306,9 @@ NSString * const mobile_safari_string = @"com.apple.mobilesafari";
                 {
                     [self.delegate uberKit:self didReceiveAccessToken:_accessToken];
                 }
+				
+				//GOT THE TOKEN!
+				
             }
         }
         else
