@@ -9,14 +9,19 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface RequestVC : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>{
+@interface RequestVC : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate>{
     MKMapView *mapView;
     CLLocationManager *locationManager;
+
 }
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *flightNumTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *reservationTypeControl;
+@property (weak, nonatomic) IBOutlet UIButton *goButton;
+
 @property (strong, nonatomic) CLLocation *initialLocation;
+
+- (IBAction)mapTapped:(id)sender;
 
 @end

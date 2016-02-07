@@ -37,6 +37,10 @@
 //[self.mapView setDelegate:self];
     self.mapView.userTrackingMode = MKUserTrackingModeFollow;
     [self.view addSubview:mapView];
+	
+	[self.reservationTypeControl.layer setCornerRadius:3];
+	[self.goButton.layer setCornerRadius:3];
+	[self.goButton setClipsToBounds:YES];
 }
 
 //- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
@@ -62,4 +66,7 @@
 }
 */
 
+- (IBAction)mapTapped:(id)sender {
+	[self resignFirstResponder];
+}
 @end

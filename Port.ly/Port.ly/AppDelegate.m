@@ -17,6 +17,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
+	
+	UberKit *uberKit = [[UberKit alloc] initWithClientID:@"xHvfPvf0lGJ--RiPDo5D7j3DXYT7Vq7W" ClientSecret:@"BHutgVeczuhDjLvjSpBmWIIltdc2GyBq0Hw9NR_R" RedirectURL:@"portly://uberwaaaat.com" ApplicationName:@"Port.ly"]; //Set these fields from your app on Uber Developers.
+	uberKit.delegate = self; //Set the delegate (only for login)
+	
+//	[uberKit startLogin];
+	
 	return YES;
 }
 
@@ -40,6 +46,20 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+	return YES;
+}
+
+#pragma mark - UberKitDelegate
+
+- (void) uberKit: (UberKit *) uberKit didReceiveAccessToken: (NSString *) accessToken {
+	//Got the access token, can now make requests for user data
+	
+}
+- (void) uberKit: (UberKit *) uberKit loginFailedWithError: (NSError *) error {
+	//An error occurred in the login process
 }
 
 @end

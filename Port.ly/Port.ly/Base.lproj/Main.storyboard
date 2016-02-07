@@ -21,6 +21,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="x4N-1d-bFo">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aRn-f5-RC7" appends="YES" id="31N-RV-IDP"/>
+                                </connections>
                             </mapView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Flight #" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNq-KK-pjG">
                                 <rect key="frame" x="20" y="28" width="560" height="30"/>
@@ -40,13 +44,13 @@
                                     <segue destination="xbq-Tb-058" kind="presentation" identifier="modalReservationVC" id="nPB-2G-tFC"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="c9h-8r-DuM">
-                                <rect key="frame" x="20" y="502" width="560" height="29"/>
+                            <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="c9h-8r-DuM">
+                                <rect key="frame" x="20" y="494" width="560" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
                                     <segment title="To"/>
-                                    <segment title="Both"/>
                                     <segment title="From"/>
+                                    <segment title="Both"/>
                                 </segments>
                                 <color key="tintColor" red="0.1215686275" green="0.72941176470000002" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
@@ -56,7 +60,7 @@
                             <constraint firstItem="pZc-tA-mcc" firstAttribute="leading" secondItem="c9h-8r-DuM" secondAttribute="leading" id="1dw-1y-nLW"/>
                             <constraint firstItem="x4N-1d-bFo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4Yr-bd-iPW"/>
                             <constraint firstItem="zNq-KK-pjG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="53L-gL-kos"/>
-                            <constraint firstItem="pZc-tA-mcc" firstAttribute="top" secondItem="c9h-8r-DuM" secondAttribute="bottom" id="5lr-ZS-Ibq"/>
+                            <constraint firstItem="pZc-tA-mcc" firstAttribute="top" secondItem="c9h-8r-DuM" secondAttribute="bottom" constant="8" id="5lr-ZS-Ibq"/>
                             <constraint firstItem="pZc-tA-mcc" firstAttribute="trailing" secondItem="c9h-8r-DuM" secondAttribute="trailing" id="B8a-6n-Osc"/>
                             <constraint firstItem="zNq-KK-pjG" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="J0W-0B-J5N"/>
                             <constraint firstItem="pZc-tA-mcc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="J0W-9U-9vL"/>
@@ -70,11 +74,17 @@
                     </view>
                     <connections>
                         <outlet property="flightNumTextField" destination="zNq-KK-pjG" id="sG3-SR-tLL"/>
+                        <outlet property="goButton" destination="pZc-tA-mcc" id="0qI-uL-Mm7"/>
                         <outlet property="mapView" destination="x4N-1d-bFo" id="MwY-hk-ZpW"/>
                         <outlet property="reservationTypeControl" destination="c9h-8r-DuM" id="Tq9-va-hdK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="aRn-f5-RC7">
+                    <connections>
+                        <action selector="mapTapped:" destination="BYZ-38-t0r" id="AdM-w0-qbV"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="565" y="537"/>
         </scene>

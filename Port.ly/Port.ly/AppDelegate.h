@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UberKit.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UberKitDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
