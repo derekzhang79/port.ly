@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface RequestVC : UIViewController{
-    MKMapView *mapview;
+@interface RequestVC : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>{
+    MKMapView *mapView;
+    CLLocationManager *locationManager;
 }
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;

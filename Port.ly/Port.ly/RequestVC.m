@@ -12,18 +12,43 @@
 
 @end
 
-@implementation RequestVC
+@implementation RequestVC {
+    CLLocation *currentLocation;
+}
 
-@synthesize mapView = _mapView;
+//@synthesize mapView = _mapView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    locationManager = [CLLocationManager new];
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locationManager requestWhenInUseAuthorization];
+    }
+//    self.mapView = [[MKMapView alloc]
+//               initWithFrame:CGRectMake(0,
+//                                        0,
+//                                        self.view.bounds.size.width,
+//                                        self.view.bounds.size.height)
+//               ];
+    self.mapView.showsUserLocation = YES;
+    self.mapView.showsBuildings = YES;
+    self.mapView.delegate = self;
+//[self.mapView setDelegate:self];
+    [self.view addSubview:mapView];
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    [mapView setRegion:MKCoordinateRegionMake(currentLocation.coordinate,MKCoordinateSpanMake(0.02, 0.02)) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    currentLocation = locations.lastObject;
 }
 
 /*
