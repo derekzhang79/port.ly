@@ -88,6 +88,10 @@
 	[self.toRideDriverImageView setImage:ride.driverImage];
 	[self.toRideDriverNameLabel setText:ride.name];
 	[self.toRideLicenseLabel setText:ride.license];
+	
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	[df setDateFormat:@"hh:mm a"];
+	[self.toRidePickupTimeLabel setText:[df stringFromDate:self.flight.toRidePickupTime]];
 }
 - (void)setupFromRide:(Ride *)ride {
 	[self.fromRideDriverNameLabel setTextColor:[UIColor blackColor]];
@@ -96,6 +100,10 @@
 	[self.fromRideDriverImageView setImage:ride.driverImage];
 	[self.fromRideDriverNameLabel setText:ride.name];
 	[self.fromRideLicenseLabel setText:ride.license];
+	
+	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	[df setDateFormat:@"hh:mm a"];
+	[self.fromRidePickupTimeLabel setText:[df stringFromDate:self.flight.fromRidePickupTime]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,11 +126,48 @@
 		self.confirmed = YES;
 		
 		//animate color change
-		[self.confirmButton setBackgroundColor:[UIColor colorWithRed:31/255.0 green:186/255.0 blue:214/255.0 alpha:1]];
+//		[self.confirmButton setBackgroundColor:[UIColor colorWithRed:31/255.0 green:186/255.0 blue:214/255.0 alpha:1]];
 		[self.confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 		[self.confirmButton setTitle:@"Confirmed!" forState:UIControlStateNormal];
 		
-		[self.confirmButton setUserInteractionEnabled:NO];
+		UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, self.confirmButton.frame.size.height,
+															 self.confirmButton.frame.size.width, self.confirmButton.frame.size.height)];
+		[v setBackgroundColor:[UIColor colorWithRed:31/255.0 green:186/255.0 blue:214/255.0 alpha:1]];
+		v.userInteractionEnabled = NO;
+		v.exclusiveTouch = NO;
+		[self.confirmButton addSubview:v];
+		
+		[UIView animateWithDuration:0.45 animations:^{
+			
+			CGRect currentRect = v.frame;
+			currentRect.origin.y = 0;
+			[v setAlpha:1];
+			[v setFrame:currentRect];
+			[self.confirmButton sendSubviewToBack:v];
+		}];
+		
+		
+//		[self.confirmButton setUserInteractionEnabled:NO];
+		
+		//TEST:
+		Ride *ride1 = [[Ride alloc]init];
+		ride1.airportCode = self.flight.fromAirportCode;
+		ride1.driverImage = [UIImage imageNamed:@"driver1"];
+		ride1.name = @"Francis";
+		ride1.license = @"804217";
+		self.flight.toRidePickupTime = [NSDate date];
+
+		[self setupToRide:ride1];
+	}else {
+		//TEST:
+		Ride *ride2 = [[Ride alloc]init];
+		ride2.airportCode = self.flight.fromAirportCode;
+		ride2.driverImage = [UIImage imageNamed:@"driver2"];
+		ride2.name = @"Chelsea";
+		ride2.license = @"VX352";
+		self.flight.fromRidePickupTime = [NSDate dateWithTimeIntervalSinceNow:9999];
+		
+		[self setupFromRide:ride2];
 	}
 }
 

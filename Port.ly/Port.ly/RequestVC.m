@@ -111,67 +111,70 @@
 }
 
 - (IBAction)go:(id)sender {
+	[self.flightNumTextField resignFirstResponder];
+	
 	[loadingView show];
 	[loadingView setState:LoadingStateLoading];
 	[loadingView setMessage:@"Finding flight..."];
-	
-	//send flight number to server
-	AppDelegate *ad = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	BOOL to, from;
-	switch (self.reservationTypeControl.selectedSegmentIndex) {
-		case 0:
-			to = YES;
-			break;
-		case 1:
-			from = YES;
-			break;
-		case 2:
-			to = YES;
-			from = YES;
-			break;
-		default:
-			break;
-	}
-	
-	NSString *flightNo = self.flightNumTextField.text;
-	
-	MSClient *client = [ad client];
-	NSDictionary *item = @{ @"userID" : [[[UIDevice currentDevice] identifierForVendor] UUIDString], @"startLat" : [NSString stringWithFormat:@"%f",ad.locationManager.location.coordinate.latitude], @"startLon" : [NSString stringWithFormat:@"%f",ad.locationManager.location.coordinate.longitude], @"flightNo" : flightNo, @"to" : @(to), @"from" : @(from)};
-	MSTable *itemTable = [client tableWithName:@"Flight"];
-	[itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
-		if (error) {
-			NSLog(@"Error: %@", error);
-		} else {
-			NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
-			
-			[itemTable readWithCompletion:^(MSQueryResult *result, NSError *err){
-				NSDictionary *flightData;
 
-				if (result.items.count > 0) {
-					flightData = result.items[0];
-				}
-				
-				//setup tempFlight with flight Data
-				[tempFlight setAirline:flightData[@"airline"]];
-				[tempFlight setFromAirport:flightData[@"fromAPname"]];
-				[tempFlight setToAirport:flightData[@"toAPname"]];
-				[tempFlight setFromAirportCode:flightData[@"fromAPcode"]];
-				[tempFlight setToAirportCode:flightData[@"toAPcode"]];
-				[tempFlight setTakeoffTimeScheduled:flightData[@"schedDdate"]];
-				[tempFlight setTakeoffTimeReal:flightData[@"estDdate"]];
-				[tempFlight setArrivalTimeScheduled:flightData[@"schedAdate"]];
-				[tempFlight setArrivalTimeReal:flightData[@"estAdate"]];
-				[tempFlight setToRidePickupTime:flightData[@"toRideDate"]];
-				[tempFlight setFromRidePickupTime:flightData[@"fromRideDate"]];
-				
-				[loadingView hide];
-				[self performSegueWithIdentifier:@"modalReservationVC" sender:self];
-			}];
-		}
-	}];
-
+	[loadingView hide];//TEST
 	[self performSegueWithIdentifier:@"modalReservationVC" sender:self];//TEST
+	
+//	//send flight number to server
+//	AppDelegate *ad = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//	
+//	BOOL to, from;
+//	switch (self.reservationTypeControl.selectedSegmentIndex) {
+//		case 0:
+//			to = YES;
+//			break;
+//		case 1:
+//			from = YES;
+//			break;
+//		case 2:
+//			to = YES;
+//			from = YES;
+//			break;
+//		default:
+//			break;
+//	}
+//	
+//	NSString *flightNo = self.flightNumTextField.text;
+//	
+//	MSClient *client = [ad client];
+//	NSDictionary *item = @{ @"userID" : [[[UIDevice currentDevice] identifierForVendor] UUIDString], @"startLat" : [NSString stringWithFormat:@"%f",ad.locationManager.location.coordinate.latitude], @"startLon" : [NSString stringWithFormat:@"%f",ad.locationManager.location.coordinate.longitude], @"flightNo" : flightNo, @"to" : @(to), @"from" : @(from)};
+//	MSTable *itemTable = [client tableWithName:@"Flight"];
+//	[itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
+//		if (error) {
+//			NSLog(@"Error: %@", error);
+//		} else {
+//			NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
+//			
+//			[itemTable readWithCompletion:^(MSQueryResult *result, NSError *err){
+//				NSDictionary *flightData;
+//
+//				if (result.items.count > 0) {
+//					flightData = result.items[0];
+//				}
+//				
+//				//setup tempFlight with flight Data
+//				[tempFlight setAirline:flightData[@"airline"]];
+//				[tempFlight setFromAirport:flightData[@"fromAPname"]];
+//				[tempFlight setToAirport:flightData[@"toAPname"]];
+//				[tempFlight setFromAirportCode:flightData[@"fromAPcode"]];
+//				[tempFlight setToAirportCode:flightData[@"toAPcode"]];
+//				[tempFlight setTakeoffTimeScheduled:flightData[@"schedDdate"]];
+//				[tempFlight setTakeoffTimeReal:flightData[@"estDdate"]];
+//				[tempFlight setArrivalTimeScheduled:flightData[@"schedAdate"]];
+//				[tempFlight setArrivalTimeReal:flightData[@"estAdate"]];
+//				[tempFlight setToRidePickupTime:flightData[@"toRideDate"]];
+//				[tempFlight setFromRidePickupTime:flightData[@"fromRideDate"]];
+//				
+//				[loadingView hide];
+//				[self performSegueWithIdentifier:@"modalReservationVC" sender:self];
+//			}];
+//		}
+//	}];
 }
 
 #pragma mark - Navigation
@@ -180,6 +183,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	ReservationVC *reservationVC = segue.destinationViewController;
 	[reservationVC setupWithFlight:tempFlight];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[self go:textField];
+	return NO;
 }
 
 @end

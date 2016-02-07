@@ -15,6 +15,6 @@
 @property UIImage *driverImage;
 @property NSString *name;
 @property NSString *license;
-@property NSDate *pickupTime;
+//@property NSDate *pickupTime;
 
 @end

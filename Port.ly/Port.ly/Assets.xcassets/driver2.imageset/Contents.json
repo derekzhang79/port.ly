@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "avatar-placeholder-generic.png",
+      "filename" : "driver-630x407.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "avatar-placeholder-generic-1.png",
+      "filename" : "driver-630x407-1.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "avatar-placeholder-generic-2.png",
+      "filename" : "driver-630x407-2.jpg",
       "scale" : "3x"
     }
   ],
